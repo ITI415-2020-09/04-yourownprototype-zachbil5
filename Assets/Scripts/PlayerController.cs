@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public GameObject ProjectilePrefab;
+    private bool invincibility = false;
+    private Color c;
     // Start is called before the first frame update
     void Start()
     {
-        
+        c = this.GetComponent<Renderer>().material.color;
     }
 
     // Update is called once per frame
@@ -33,5 +35,23 @@ public class PlayerController : MonoBehaviour
     {
        GameObject projectile = Instantiate(ProjectilePrefab) as GameObject;
         projectile.transform.position = transform.position;
+    }
+
+    public void Hit()
+    {
+        invincibility = true;
+        
+        c.a = 0.3f + Mathf.PingPong(Time.time, 0.7f);
+        Invoke("ResetInvincibility", 3f);
+    }
+    public bool isInvulnerable()
+    {
+        return invincibility;
+    }
+
+    private void ResetInvincibility()
+    {
+        c = Color.white;
+        invincibility = false;
     }
 }
