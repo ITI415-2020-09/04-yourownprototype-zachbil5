@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
         pos.x = Mathf.Clamp(pos.x,-19, 19);
         pos.y = Mathf.Clamp(pos.y, 1, 19);
         this.transform.position = Vector3.Lerp(transform.position,pos,0.05f);
+
+        
     }
 
     private void OnMouseDown()
@@ -40,9 +42,8 @@ public class PlayerController : MonoBehaviour
     public void Hit()
     {
         invincibility = true;
-        
-        c.a = 0.3f + Mathf.PingPong(Time.time, 0.7f);
-        Invoke("ResetInvincibility", 3f);
+        Invoke("ResetInvincibility", 5f);
+       
     }
     public bool isInvulnerable()
     {
@@ -51,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
     private void ResetInvincibility()
     {
-        c = Color.white;
         invincibility = false;
     }
 }

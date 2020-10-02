@@ -33,6 +33,7 @@ public class EnemyProjectile : MonoBehaviour
             if (!pc.isInvulnerable())
             {
                 gc.SetLives(-1);
+                pc.Hit();
             }
             Destroy(this.gameObject);
         }
