@@ -8,11 +8,13 @@ public class GameController : MonoBehaviour
 {
     // Start is called before the first frame update
     public TextMeshProUGUI level, score, lives;
+    public GameObject winText;
     public int livesCount = 3, levelNumber = 1, winScore = 50;
     private int scoreCount = 0;
     private EnemySpawner es;
     void Awake()
     {
+        Cursor.visible = false;
         level.text = "Level: " + levelNumber;
         score.text = "Score: " + 0;
         lives.text = "Lives: " + livesCount;
@@ -36,6 +38,7 @@ public class GameController : MonoBehaviour
         else
         {
             //Win or next level
+            winText.SetActive(true);
         }
     }
 

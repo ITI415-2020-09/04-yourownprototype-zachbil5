@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         pos.y = mousePos3D.y;
         pos.x = Mathf.Clamp(pos.x,-19, 19);
         pos.y = Mathf.Clamp(pos.y, 1, 19);
-        this.transform.position = Vector3.Lerp(transform.position,pos,0.05f);
+        this.transform.position = pos;//Vector3.MoveTowards(transform.position,pos, 20f*Time.deltaTime);
 
         
     }

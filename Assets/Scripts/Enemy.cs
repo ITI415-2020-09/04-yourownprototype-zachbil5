@@ -9,9 +9,19 @@ public class Enemy : MonoBehaviour
     public float speed = 3f;
     public float leftEdge = -20f, rightEdge = 20f;
     public float chanceToChangeDirection = 0.001f;
+    public int enemyNumber = 1;
     // Start is called before the first frame update
     void Start()
     {
+        if (enemyNumber == 1)
+        {
+            secondsBetweenProjectile = 1;
+        }
+        else if (enemyNumber == 2)
+        {
+            secondsBetweenProjectile = 0.5f;
+            speed = 4f;
+        }
         Invoke("FireProjectile", secondsBetweenProjectile);
     }
 
@@ -20,9 +30,13 @@ public class Enemy : MonoBehaviour
     {
         Vector3 pos = transform.position;
         pos.x += speed * Time.deltaTime;
+        
         transform.position = pos;
-
-        if(transform.position.x > rightEdge)
+        if (enemyNumber == 2)
+        {
+            transform.Rotate(new Vector3(0, 0, 30f) * Time.deltaTime);
+        }
+        if (transform.position.x > rightEdge)
         {
             speed = -Mathf.Abs(speed); 
         }
@@ -42,8 +56,10 @@ public class Enemy : MonoBehaviour
         Vector3 pos;
         GameObject projectile = Instantiate<GameObject>(EnemyProj);
         pos = transform.position;
+        
         pos.y -= 0.5f; 
         projectile.transform.position = pos;
+        
         Invoke("FireProjectile", secondsBetweenProjectile);
     }
 }
